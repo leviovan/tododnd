@@ -1,0 +1,26 @@
+
+.title{
+    font-size: 40px;
+    line-height: 62px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left : 15px;
+}
+.header{
+    border-top: 2px solid rgb(192, 137, 137);
+    border-bottom : 2px solid rgb(192, 137, 137);
+    border-right:   1px solid rgb(192, 137, 137);
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 10px;
+    &__item{
+        min-width: 80px;
+    border-left: 1px solid rgb(192, 137, 137);
+  
+   }
+ 
+}
+.text{
+    padding: 10px 20px;
+    font-size:22px;
+}
