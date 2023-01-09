@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProject, Iproject } from "../../redux/projectSlice/projectSlice";
 import { AppDispatch, RootState } from "../../redux/store";
+import Modalmain from "../modalMain/modalmain";
 import ItemProject from "./items/itemProject";
 import style from "./project.module.scss";
 const Project = () => {

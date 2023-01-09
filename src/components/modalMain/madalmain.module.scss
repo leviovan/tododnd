@@ -1,0 +1,21 @@
+
+.mainModal{
+    position: absolute;
+    border: 1px solid black;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 50px;
+    text-align: center;
+    width: 1280px ;
+    border-radius: 30px;
+    height: 700px;
+    scale: 0;
+    transition: 0.5s;
+
+}
+.showModal{
+   scale: 1; 
+}

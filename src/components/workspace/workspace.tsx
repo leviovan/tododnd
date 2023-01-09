@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -7,9 +7,11 @@ import Task from "./task/task";
 import { useDrop } from "react-dnd";
 import style from "./workspace.module.scss";
 import React from "react";
+import Modalmain from "../modalMain/modalmain";
 
 const Workspace = () => {
   const { id } = useParams();
+  const [showModal, setShowModal] = useState(false);
   const [tasks, setTasks] = React.useState<Itask[]>();
   const [dataTask, setDataTask] = useState<any>();
   const [dataTarget, setDataTarget] = useState<
@@ -165,8 +167,15 @@ const Workspace = () => {
     console.log(dataTarget);
   }, [dataTarget]);
 
+  const showModalfinc = () => {
+    setShowModal(true);
+  };
   return (
     <div>
+      <Modalmain
+        setShowModal={() => setShowModal(false)}
+        showModal={showModal}
+      />
       <h2 className={style.title}> Строительный магазин</h2>
       <hr className={style.line} />
       <div className={style.option}></div>
@@ -178,6 +187,7 @@ const Workspace = () => {
               ?.sort((a, b) => Number(b.priority) - Number(a.priority))
               .map((item: Itask, index) => (
                 <Task
+                  onClick={() => setShowModal(true)}
                   key={`${index}__r`}
                   index={index}
                   Typetype="notStarted"
@@ -192,6 +202,7 @@ const Workspace = () => {
               ?.sort((a, b) => Number(b.priority) - Number(a.priority))
               .map((item: Itask, index) => (
                 <Task
+                  onClick={() => setShowModal(true)}
                   key={`${index}__o`}
                   index={index}
                   Typetype="inWork"
@@ -207,6 +218,7 @@ const Workspace = () => {
               .map((item: Itask, index) => {
                 return (
                   <Task
+                    onClick={() => setShowModal(true)}
                     key={`${index}__w`}
                     index={index}
                     Typetype="done"

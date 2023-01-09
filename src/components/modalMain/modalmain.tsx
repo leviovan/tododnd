@@ -1,8 +1,16 @@
-import React from "react";
 import style from "./madalmain.module.scss";
-const Modalmain = () => {
+import cx from "classnames";
+const Modalmain: React.FC<{ showModal: boolean } & { setShowModal: any }> = ({
+  showModal,
+  setShowModal,
+}) => {
+  console.log(showModal);
+
   return (
-    <div className={style.mainModal}>
+    <div
+      onClick={() => setShowModal()}
+      className={cx(style.mainModal, showModal ? style.showModal : "")}
+    >
       <div className={style.header}>
         <h1 className={style.title}>Переделать комментарии</h1>
       </div>
