@@ -10,7 +10,7 @@ export interface Itask {
   deadLine:      number;
   priority:      string;
   files:         string;
-  currentStatus: string;
+  currentStatus: "inWork"|"notStarted"|"done";
   id:            string;
 }
 export interface ITaskState {

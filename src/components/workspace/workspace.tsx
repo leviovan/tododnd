@@ -13,7 +13,21 @@ const Workspace = () => {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [tasks, setTasks] = React.useState<Itask[]>();
-  const [dataTask, setDataTask] = useState<any>();
+  const [currnetTask, setCurrnetTask] = useState<Itask[]>([
+    {
+      taskTitle: "",
+      idProject: 0,
+      description: "",
+      dataStart: 0,
+      timeInWork: 0,
+      deadLine: 0,
+      priority: "",
+      files: "",
+      currentStatus: "done",
+      id: "",
+    },
+  ]);
+
   const [dataTarget, setDataTarget] = useState<
     "notStarted" | "inWork" | "done"
   >();
@@ -167,12 +181,20 @@ const Workspace = () => {
     console.log(dataTarget);
   }, [dataTarget]);
 
-  const showModalfinc = () => {
+  const showModalfinc = (id: string) => {
     setShowModal(true);
+    setCurrnetTask(
+      task?.filter((item: Itask) => {
+        return item.id === id;
+      })
+    );
+    console.log(currnetTask);
   };
+
   return (
     <div>
       <Modalmain
+        currnetTask={currnetTask}
         setShowModal={() => setShowModal(false)}
         showModal={showModal}
       />
@@ -187,7 +209,7 @@ const Workspace = () => {
               ?.sort((a, b) => Number(b.priority) - Number(a.priority))
               .map((item: Itask, index) => (
                 <Task
-                  onClick={() => setShowModal(true)}
+                  onClick={() => showModalfinc(item.id)}
                   key={`${index}__r`}
                   index={index}
                   Typetype="notStarted"
@@ -202,7 +224,7 @@ const Workspace = () => {
               ?.sort((a, b) => Number(b.priority) - Number(a.priority))
               .map((item: Itask, index) => (
                 <Task
-                  onClick={() => setShowModal(true)}
+                  onClick={() => showModalfinc(item.id)}
                   key={`${index}__o`}
                   index={index}
                   Typetype="inWork"
@@ -218,7 +240,7 @@ const Workspace = () => {
               .map((item: Itask, index) => {
                 return (
                   <Task
-                    onClick={() => setShowModal(true)}
+                    onClick={() => showModalfinc(item.id)}
                     key={`${index}__w`}
                     index={index}
                     Typetype="done"
