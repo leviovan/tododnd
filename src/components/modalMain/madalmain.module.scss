@@ -14,13 +14,16 @@
     height: 700px;
     scale: 0;
     transition: 0.425s;
-    box-shadow: 2vw 2vw 50vw 10vw  rgba(0, 0, 0, 0.253) ;
+    box-shadow: 2vw 2vw 50vw 50vw rgba(0, 0, 0, 0.200) ;
+    background-color: #d5e2ff;
     .header{
         border-bottom: 1px solid black;
-        // min-height: 70px;
+        box-shadow: 1px 1px 1px 1px black;
         display: flex;
         justify-content: space-between;
-       
+       background: #86a3e5;;
+       border-top-left-radius: 30px;
+       border-top-right-radius:30px ;
         padding: 10px 10px 10px 25px;
         .title_block{
             display: flex;
@@ -103,7 +106,20 @@
     .leftside{
         padding: 10px 5px 10px 25px;
         flex: 1 1 60%;
-     
+        .comment_body{
+           min-height: 300px;
+            .title_point{
+                color: rgb(163, 163, 163);
+                margin: 15px 5px 5px 10px ;
+                font-size: 20px;
+            }
+            padding: 10px;
+            box-shadow: inset 0px 0px 5px 0px #888787;
+            border-radius: 5px;
+            width: 80%;
+            min-height: 200px;
+            background-color: rgb(243, 243, 243);
+        }
     }
     .rightside{
         flex: 1 1 30%;
@@ -114,5 +130,7 @@
     }
 }
 .showModal{
+  
    scale: 1; 
+  
 }

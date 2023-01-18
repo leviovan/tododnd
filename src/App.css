@@ -24,6 +24,8 @@ html,body{
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
+	background: linear-gradient(180deg, rgb(114, 99, 252) 0%, rgb(184, 183, 255) 70%) 100% 100% ;
+	color: black;
 
 }
 
@@ -32,7 +34,7 @@ input,button,textarea{font-family:inherit;}
 input::-ms-clear{display: none;}
 button{cursor: pointer;}
 button::-moz-focus-inner {padding:0;border:0;}
-a, a:visited{text-decoration: none;}
+a, a:visited{text-decoration: none; color: black;}
 a:hover{text-decoration: none;}
 ul li{list-style: none;}
 img{vertical-align: top;}

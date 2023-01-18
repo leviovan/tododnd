@@ -97,7 +97,10 @@ const Modalmain: React.FC<
             name="description"
             id="textarea"
           ></textarea>
-          <Comment comment={comment} />
+          <p className={style.title_point}>Комментарии</p>
+          <div className={style.comment_body}>
+            <Comment comment={comment} />
+          </div>
         </div>
         <div className={style.rightside}>
           <p className={style.title_point}>Дата создания</p>
