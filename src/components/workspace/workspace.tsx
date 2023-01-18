@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/store";
-import { fetchTask, Itask, ITaskState } from "../../redux/taskSlice/taskSlice";
+import {
+  fetchTask,
+  Itask,
+  setCurrentTask,
+} from "../../redux/taskSlice/taskSlice";
 import Task from "./task/task";
 import { useDrop } from "react-dnd";
 import style from "./workspace.module.scss";
@@ -13,20 +17,19 @@ const Workspace = () => {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [tasks, setTasks] = React.useState<Itask[]>();
-  const [currnetTask, setCurrnetTask] = useState<Itask[]>([
-    {
-      taskTitle: "",
-      idProject: 0,
-      description: "",
-      dataStart: 0,
-      timeInWork: 0,
-      deadLine: 0,
-      priority: "",
-      files: "",
-      currentStatus: "done",
-      id: "",
-    },
-  ]);
+  const [currnetTask, setCurrnetTask] = useState<Itask>({
+    taskTitle: "",
+    idProject: 0,
+    description: "",
+    dataStart: 0,
+    timeInWork: 0,
+    deadLine: 0,
+    priority: "",
+    files: "",
+    currentStatus: "done",
+    id: "",
+    comment: [],
+  });
 
   const [dataTarget, setDataTarget] = useState<
     "notStarted" | "inWork" | "done"
@@ -54,7 +57,6 @@ const Workspace = () => {
         ?.filter((item: Itask) => item.idProject === Number(id))
         .filter((item: Itask) => item.currentStatus === "done")
     );
-    console.log("wwwwwwwwwwwwwwwwww");
   };
 
   const dispath = useDispatch<AppDispatch>();
@@ -177,19 +179,21 @@ const Workspace = () => {
 
     console.log("-----------");
   };
-  useEffect(() => {
-    console.log(dataTarget);
-  }, [dataTarget]);
 
   const showModalfinc = (id: string) => {
     setShowModal(true);
-    setCurrnetTask(
-      task?.filter((item: Itask) => {
-        return item.id === id;
-      })
-    );
-    console.log(currnetTask);
+
+    const w = task?.filter((item: Itask) => {
+      return item.id === id;
+    });
+    console.log(w);
+
+    setCurrnetTask(w[0]);
   };
+
+  useEffect(() => {
+    dispath(setCurrentTask(currnetTask));
+  }, [currnetTask]);
 
   return (
     <div>

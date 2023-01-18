@@ -1,3 +1,4 @@
+import { utimes } from "fs";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProject, Iproject } from "../../redux/projectSlice/projectSlice";
@@ -29,7 +30,7 @@ const Project = () => {
         </div>
       </div>
       {project?.map((item) => {
-        return <ItemProject {...item} />;
+        return <ItemProject key={`key_${item.id}`} {...item} />;
       })}
     </div>
   );

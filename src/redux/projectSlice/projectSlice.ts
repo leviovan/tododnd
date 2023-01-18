@@ -24,8 +24,7 @@ export const fetchProject = createAsyncThunk(
       
       return (data) 
     }
-  )
-
+)
 
 export const projectSlice = createSlice({
   name: 'project',

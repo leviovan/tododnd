@@ -7,7 +7,7 @@
     margin-right: auto;
     left: 0;
     right: 0;
-    top: 50px;
+    top: 100px;
     text-align: center;
     width: 1280px ;
     border-radius: 30px;
@@ -19,11 +19,21 @@
         border-bottom: 1px solid black;
         // min-height: 70px;
         display: flex;
-        padding: 10px 5px 10px 25px;
+        justify-content: space-between;
+       
+        padding: 10px 10px 10px 25px;
+        .title_block{
+            display: flex;
+        }
         .title{
             font-size: 46px;
             text-align: left;
             line-height: 52px;
+        }
+        .closeModal{
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
         }
         .priority{
             // flex:1 1 15%;
@@ -60,7 +70,6 @@
             }
         }
     }
-
 }
 .body{
     display: flex;
@@ -83,11 +92,10 @@
         border-radius: 15px;
         height: 40px;
         width: 80%;
-        padding: 5px;
+        padding: 5px 5px 5px 10px;
         font-size: 24px;
         margin: 0px 5px 0px 5px ;
     }
-
     .title_point{
         color: rgb(163, 163, 163);
         margin: 15px 5px 5px 10px ;
@@ -95,20 +103,7 @@
     .leftside{
         padding: 10px 5px 10px 25px;
         flex: 1 1 60%;
-        .comment{
-
-            .body{
-                padding: 10px;
-                width: 100px;
-                height: 100px;
-                box-shadow: inset 0px 0px 5px 0px #888787;
-                border-radius: 5px;
-                width: 80%;
-                height: 100%;
-                min-height: 200px;
-                background-color: rgb(243, 243, 243);
-            }
-        }
+     
     }
     .rightside{
         flex: 1 1 30%;
