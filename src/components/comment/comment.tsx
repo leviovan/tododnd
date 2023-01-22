@@ -6,7 +6,9 @@ const Comment: React.FC<{ comment: IComment[] }> = (comment) => {
   return (
     <>
       {comment &&
-        comment.comment.map((item) => <CommentItem datacomment={item} />)}
+        comment.comment.map((item, index) => (
+          <CommentItem key={`comment__${index}`} datacomment={item} />
+        ))}
     </>
   );
 };

@@ -1,6 +1,6 @@
 
 .mainModal{
-    position: absolute;
+    position: fixed;
     border: 1px solid black;
     background-color: white;
     margin-left: auto;
@@ -11,7 +11,7 @@
     text-align: center;
     width: 1280px ;
     border-radius: 30px;
-    height: 700px;
+    min-height: 700px;
     scale: 0;
     transition: 0.425s;
     box-shadow: 2vw 2vw 50vw 50vw rgba(0, 0, 0, 0.200) ;
@@ -21,10 +21,10 @@
         box-shadow: 1px 1px 1px 1px black;
         display: flex;
         justify-content: space-between;
-       background: #86a3e5;;
-       border-top-left-radius: 30px;
-       border-top-right-radius:30px ;
-        padding: 10px 10px 10px 25px;
+        background: #86a3e5;;
+        border-top-left-radius: 30px;
+        border-top-right-radius:30px ;
+            padding: 10px 10px 10px 25px;
         .title_block{
             display: flex;
         }
@@ -79,6 +79,7 @@
     text-align: left;
     justify-content: space-between;
     textarea{
+        background-color: #c8dfff;;
         resize: none;
         padding: 5px;
         font-style: italic;
@@ -86,12 +87,11 @@
         width: 80%;
         border-radius: 5px;
         font-size: 20px;
-        background-color: rgb(243, 243, 243);
         box-shadow: inset 0px 0px 5px 0px #888787;
     }
     input{
+        background-color: #c8dfff;;
         box-shadow: inset 0px 0px 5px 0px #888787;
-        background-color: rgb(243, 243, 243);
         border-radius: 15px;
         height: 40px;
         width: 80%;
@@ -107,7 +107,19 @@
         padding: 10px 5px 10px 25px;
         flex: 1 1 60%;
         .comment_body{
-           min-height: 300px;
+            background-color: #c8dfff;;
+            height: 300px;
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                width: 5px; /* ширина для вертикального скролла */
+             
+                background-color: #c8dfff;;
+                border: 1px solid #86a3e5;
+                border-radius: 10px;
+            }
+            &::-webkit-scrollbar-thumb {
+                box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            }
             .title_point{
                 color: rgb(163, 163, 163);
                 margin: 15px 5px 5px 10px ;
@@ -118,7 +130,6 @@
             border-radius: 5px;
             width: 80%;
             min-height: 200px;
-            background-color: rgb(243, 243, 243);
         }
     }
     .rightside{

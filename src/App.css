@@ -16,7 +16,7 @@ a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
 
 html,body{
-	height: 100%;
+	min-height: 100%;
 	width: 100%;
 	font-size: 100%;
 	line-height: 1;
@@ -24,11 +24,15 @@ html,body{
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
-	background: linear-gradient(180deg, rgb(114, 99, 252) 0%, rgb(184, 183, 255) 70%) 100% 100% ;
+
+	background-size: 100%;
+	background-repeat: no-repeat;
 	color: black;
+}
+body{
+	background: linear-gradient(180deg, rgb(114, 99, 252) 0%, rgb(184, 183, 255) 50%,rgb(114, 99, 252) 100%) ;
 
 }
-
 input,button,textarea{font-family:inherit;}
 
 input::-ms-clear{display: none;}

@@ -16,7 +16,7 @@ import Modalmain from "../modalMain/modalmain";
 const Workspace = () => {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
-  const [tasks, setTasks] = React.useState<Itask[]>();
+  // const [tasks, setTasks] = React.useState<Itask[]>();
   const [currnetTask, setCurrnetTask] = useState<Itask>({
     taskTitle: "",
     idProject: 0,
@@ -41,7 +41,7 @@ const Workspace = () => {
 
   const fetchTask1 = async () => {
     dispath(fetchTask());
-    setTasks(task);
+    // setTasks(task);
     setTaskToDo(
       task
         ?.filter((item: Itask) => item.idProject === Number(id))
