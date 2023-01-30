@@ -1,14 +1,13 @@
 import style from "./madalmain.module.scss";
 import cx from "classnames";
-import { Itask } from "../../redux/taskSlice/taskSlice";
+import { changeCurrentStatus, Itask } from "../../redux/taskSlice/taskSlice";
 import Comment from "../comment/comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
 const Modalmain: React.FC<
   { showModal: boolean } & { setShowModal: any } & { currnetTask: Itask }
 > = ({ showModal, setShowModal, currnetTask }) => {
-  const [currnetTaskData, setCurrnetTaskData] = useState<Itask>(currnetTask);
-  console.log(currnetTaskData);
-
   const {
     currentStatus,
     dataStart,
@@ -23,11 +22,42 @@ const Modalmain: React.FC<
     comment,
   } = currnetTask;
 
+  const dispath = useDispatch<AppDispatch>();
+
+  // const [currnetTaskData, setCurrnetTaskData] = useState<Itask>(currnetTask);
+
+  const [deadLineInput, setDeadLineInput] = useState<string>(deadLine);
+
+  const currentTaskssss = useSelector((state) => state);
+  console.log(currentTaskssss);
+
   const status = {
     notStarted: "Не начинали ",
     inWork: "В работе",
     done: "Завершили",
   };
+  useEffect(() => {
+    // setCurrnetTaskData(currnetTask);
+    setDeadLineInput(deadLine);
+  }, []);
+
+  useEffect(() => {
+    setDeadLineInput(deadLine);
+  }, [currnetTask]);
+
+  const handlerDeadLineChange = (text: string) => {
+    setDeadLineInput(text);
+  };
+
+  const OnchangeHandlerCurrentStatus = (text: string) => {
+    console.log(text);
+    //@ts-ignore
+    const b = Object.keys(status).find((key) => status[key] === text);
+    //@ts-ignore
+    dispath(changeCurrentStatus(b));
+  };
+
+  console.log(status[currentStatus]);
 
   return (
     <div className={cx(style.mainModal, showModal ? style.showModal : "")}>
@@ -96,24 +126,53 @@ const Modalmain: React.FC<
           ></textarea>
           <p className={style.title_point}>Комментарии</p>
           <div className={style.comment_body}>
-            <Comment comment={comment} />
+            <Comment comment={comment && comment} />
           </div>
         </div>
         <div className={style.rightside}>
           <p className={style.title_point}>Дата создания</p>
-          <input readOnly value={dataStart} name="description" id="textarea" />
-          <p className={style.title_point}>Время в работе</p>
-          <input readOnly value={timeInWork} name="description" id="textarea" />
-          <p className={style.title_point}>Дата окончания</p>
-          <input readOnly value={deadLine} name="description" id="textarea" />
-          <p className={style.title_point}>Текущий статус </p>
           <input
+            type={"date"}
+            className={style.fieldData}
             readOnly
-            value={status[currentStatus]}
-            name="description"
-            id="textarea"
+            value={dataStart}
+            name="dateStart"
           />
-          {/* <p className={style.title_point}>Прикриплённые файлы </p> */}
+          <p className={style.title_point}>Время в работе</p>
+          <input
+            type={"text"}
+            className={style.fieldData}
+            readOnly
+            value={timeInWork}
+            name="timeInWork"
+          />
+          <p className={style.title_point}>Дата окончания</p>
+          <input
+            onChange={(e: React.FormEvent<HTMLInputElement>) =>
+              handlerDeadLineChange(e.currentTarget.value)
+            }
+            className={style.fieldData}
+            value={deadLineInput}
+            name="deadline"
+            type={"date"}
+          />
+          <p className={style.title_point}>Текущий статус </p>
+          <select
+            onChange={(e) =>
+              OnchangeHandlerCurrentStatus(e.currentTarget.value)
+            }
+            className={style.fieldData}
+            name="currentStatus"
+            value={status[currentStatus]}
+          >
+            {Object.values(status).map((i: string) => {
+              return (
+                <option selected key={i} value={i}>
+                  {i}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </div>
     </div>

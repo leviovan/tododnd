@@ -20,7 +20,7 @@ export const fetchProject = createAsyncThunk(
     async () => {
       const response = await fetch(`https://638872bdd94a7e50409bcdb5.mockapi.io/project`)
       const data=await response.json()
-        // console.log(data);
+   
       
       return (data) 
     }

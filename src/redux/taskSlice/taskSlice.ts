@@ -14,14 +14,14 @@ export interface Itask {
   taskTitle:     string;
   idProject:     number;
   description:   string;
-  dataStart:     number;
-  timeInWork:    number;
-  deadLine:      number;
+  dataStart:     string;
+  timeInWork:    string;
+  deadLine:      string;
   priority:      string;
   files:         string;
   currentStatus: "inWork"|"notStarted"|"done";
   id:            string;
-  comment:IComment[]
+  comment?:IComment[]
 }
 
 export interface ITaskState {
@@ -31,8 +31,21 @@ export interface ITaskState {
 
 
 const initialState ={
-    task:[
-  ]
+    task:[]
+//   ],
+//   currnetTask:{
+//     taskTitle:     "string",
+//     idProject:     1,
+//     description:   "string",
+//     dataStart:     "string",
+//     timeInWork:    "string",
+//     deadLine:      "string",
+//     priority:      "string",
+//     files:         "string",
+//     currentStatus: "notStarted",
+//     id:            "string",
+//     comment:{}
+// }
 }
 
 export const fetchTask = createAsyncThunk(
@@ -46,17 +59,22 @@ export const fetchTask = createAsyncThunk(
 export const taskSlice = createSlice({
   name: 'task',
   initialState,
-  reducers: {
+  reducers:{
     setCurrentTask: (state:ITaskState,action:PayloadAction<Itask>)=>{
       state.currnetTask=action.payload;
+      console.log( state.currnetTask);
+    },
+    changeCurrentStatus: (state:ITaskState,action:PayloadAction<"inWork" | "notStarted" | "done">)=>{
+      state.currnetTask?state.currnetTask.currentStatus=action.payload:console.log("error");
+      //@ts-ignore
+      state.task=[...state.task,state.currnetTask]
     }
   },
   
   extraReducers: (builder) => {
     builder.addCase(fetchTask.fulfilled, (state:ITaskState, { payload }) => {
-     //   console.log(state);
         state.task=payload;
-      //  console.log(state);
+
     })
     builder.addCase(fetchTask.rejected, (state, action) => {
         console.log("error");
@@ -66,6 +84,6 @@ export const taskSlice = createSlice({
 })
 
 
-export const { setCurrentTask } = taskSlice.actions
+export const { setCurrentTask, changeCurrentStatus } = taskSlice.actions
 
 export default taskSlice.reducer

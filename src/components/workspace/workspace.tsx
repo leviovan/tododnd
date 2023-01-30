@@ -16,14 +16,13 @@ import Modalmain from "../modalMain/modalmain";
 const Workspace = () => {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
-  // const [tasks, setTasks] = React.useState<Itask[]>();
   const [currnetTask, setCurrnetTask] = useState<Itask>({
     taskTitle: "",
     idProject: 0,
     description: "",
-    dataStart: 0,
-    timeInWork: 0,
-    deadLine: 0,
+    dataStart: "",
+    timeInWork: "",
+    deadLine: "",
     priority: "",
     files: "",
     currentStatus: "done",
@@ -41,7 +40,6 @@ const Workspace = () => {
 
   const fetchTask1 = async () => {
     dispath(fetchTask());
-    // setTasks(task);
     setTaskToDo(
       task
         ?.filter((item: Itask) => item.idProject === Number(id))
@@ -78,7 +76,6 @@ const Workspace = () => {
     accept: ["notStarted", "inWork", "done"],
     hover() {
       setDataTarget("notStarted");
-      console.log();
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
@@ -186,7 +183,6 @@ const Workspace = () => {
     const w = task?.filter((item: Itask) => {
       return item.id === id;
     });
-    console.log(w);
 
     setCurrnetTask(w[0]);
   };

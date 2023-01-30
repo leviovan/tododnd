@@ -3,7 +3,6 @@ import { IComment } from "../../../redux/taskSlice/taskSlice";
 import style from "./CommentItem.module.scss";
 
 const CommentItem: React.FC<{ datacomment: IComment }> = ({ datacomment }) => {
-  console.log(datacomment);
   const marg = datacomment.parentId ? 30 * datacomment.parentId : 30 * 0;
   return (
     <>
