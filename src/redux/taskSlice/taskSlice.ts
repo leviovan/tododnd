@@ -65,9 +65,9 @@ export const taskSlice = createSlice({
       console.log( state.currnetTask);
     },
     changeCurrentStatus: (state:ITaskState,action:PayloadAction<"inWork" | "notStarted" | "done">)=>{
-      state.currnetTask?state.currnetTask.currentStatus=action.payload:console.log("error");
+      state.currnetTask ? state.currnetTask.currentStatus=action.payload:console.log("error");
       //@ts-ignore
-      state.task=[...state.task,state.currnetTask]
+      state.task=[...state.task?.filter((item)=>item.id !== state.currnetTask?.id ),state.currnetTask]
     }
   },
   

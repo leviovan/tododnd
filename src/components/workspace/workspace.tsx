@@ -33,6 +33,7 @@ const Workspace = () => {
   const [dataTarget, setDataTarget] = useState<
     "notStarted" | "inWork" | "done"
   >();
+  const [tasks, setTasks] = useState<Itask[]>();
   const [taskToDo, setTaskToDo] = useState<Itask[]>();
   const [taskInWork, setTaskInWork] = useState<Itask[]>();
   const [taskDone, setTaskDone] = useState<Itask[]>();
@@ -40,6 +41,10 @@ const Workspace = () => {
 
   const fetchTask1 = async () => {
     dispath(fetchTask());
+    setTasks(task);
+  };
+  const setTaskAll = () => {
+    setTasks(task);
     setTaskToDo(
       task
         ?.filter((item: Itask) => item.idProject === Number(id))
@@ -55,12 +60,21 @@ const Workspace = () => {
         ?.filter((item: Itask) => item.idProject === Number(id))
         .filter((item: Itask) => item.currentStatus === "done")
     );
+    console.log("---------");
+    console.log(tasks);
+    console.log("---------");
   };
-
   const dispath = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    fetchTask1();
+    task.length === 0 && fetchTask1();
+    setTaskAll();
   }, []);
+
+  useEffect(() => {
+    setTaskAll();
+    console.log("work");
+  }, [task]);
 
   const [{ isOver }, addToStatusRef] = useDrop({
     accept: ["notStarted", "inWork", "done"],
