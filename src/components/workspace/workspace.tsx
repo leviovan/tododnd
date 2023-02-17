@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../redux/store";
 import {
+  changeCurrentStatus,
   fetchTask,
   Itask,
   setCurrentTask,
@@ -32,7 +33,7 @@ const Workspace = () => {
 
   const [dataTarget, setDataTarget] = useState<
     "notStarted" | "inWork" | "done"
-  >();
+  >("notStarted");
   const [tasks, setTasks] = useState<Itask[]>();
   const [taskToDo, setTaskToDo] = useState<Itask[]>();
   const [taskInWork, setTaskInWork] = useState<Itask[]>();
@@ -60,9 +61,9 @@ const Workspace = () => {
         ?.filter((item: Itask) => item.idProject === Number(id))
         .filter((item: Itask) => item.currentStatus === "done")
     );
-    console.log("---------");
-    console.log(tasks);
-    console.log("---------");
+    // console.log("---------");
+    // console.log(tasks);
+    // console.log("---------");
   };
   const dispath = useDispatch<AppDispatch>();
 
@@ -73,7 +74,6 @@ const Workspace = () => {
 
   useEffect(() => {
     setTaskAll();
-    console.log("work");
   }, [task]);
 
   const [{ isOver }, addToStatusRef] = useDrop({
@@ -106,8 +106,6 @@ const Workspace = () => {
   });
 
   const moveTask = (data: any) => {
-    console.log("---------------");
-
     switch (dataTarget) {
       case "notStarted":
         if (data.type === "inWork") {
@@ -187,18 +185,16 @@ const Workspace = () => {
       default:
         break;
     }
-
-    console.log("-----------");
   };
 
   const showModalfinc = (id: string) => {
-    setShowModal(true);
-
     const w = task?.filter((item: Itask) => {
       return item.id === id;
     });
-
     setCurrnetTask(w[0]);
+    console.log(currnetTask);
+
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -223,6 +219,7 @@ const Workspace = () => {
               ?.sort((a, b) => Number(b.priority) - Number(a.priority))
               .map((item: Itask, index) => (
                 <Task
+                  dataTarget={dataTarget}
                   onClick={() => showModalfinc(item.id)}
                   key={`${index}__r`}
                   index={index}
@@ -238,6 +235,7 @@ const Workspace = () => {
               ?.sort((a, b) => Number(b.priority) - Number(a.priority))
               .map((item: Itask, index) => (
                 <Task
+                  dataTarget={dataTarget}
                   onClick={() => showModalfinc(item.id)}
                   key={`${index}__o`}
                   index={index}
@@ -254,6 +252,7 @@ const Workspace = () => {
               .map((item: Itask, index) => {
                 return (
                   <Task
+                    dataTarget={dataTarget}
                     onClick={() => showModalfinc(item.id)}
                     key={`${index}__w`}
                     index={index}

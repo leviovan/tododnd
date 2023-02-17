@@ -23,13 +23,11 @@ const Modalmain: React.FC<
   } = currnetTask;
 
   const dispath = useDispatch<AppDispatch>();
-
   // const [currnetTaskData, setCurrnetTaskData] = useState<Itask>(currnetTask);
 
   const [deadLineInput, setDeadLineInput] = useState<string>(deadLine);
 
   const currentTaskssss = useSelector((state) => state);
-  console.log(currentTaskssss);
 
   const status = {
     notStarted: "Не начинали ",
@@ -56,8 +54,6 @@ const Modalmain: React.FC<
     //@ts-ignore
     dispath(changeCurrentStatus(b));
   };
-
-  console.log(status[currentStatus]);
 
   return (
     <div className={cx(style.mainModal, showModal ? style.showModal : "")}>

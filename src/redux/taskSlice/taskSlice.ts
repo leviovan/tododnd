@@ -62,7 +62,7 @@ export const taskSlice = createSlice({
   reducers:{
     setCurrentTask: (state:ITaskState,action:PayloadAction<Itask>)=>{
       state.currnetTask=action.payload;
-      console.log( state.currnetTask);
+  
     },
     changeCurrentStatus: (state:ITaskState,action:PayloadAction<"inWork" | "notStarted" | "done">)=>{
       state.currnetTask ? state.currnetTask.currentStatus=action.payload:console.log("error");
